@@ -16,7 +16,7 @@ app = FastAPI(title="Orcadio API")
 # Frontend configuration
 frontend_url = os.getenv(
     "FRONTEND_URL",
-    "http://localhost:3000",
+    "https://prognition.vercel.app",
 )
 
 app.add_middleware(
