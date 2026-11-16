@@ -305,7 +305,8 @@ export default function NoteAIPanel({ title, getContent }: Props) {
             <div className="h-3 w-full animate-pulse rounded bg-[#E5D7C1]" />
             <div className="h-3 w-5/6 animate-pulse rounded bg-[#E5D7C1]" />
             <p className="text-xs text-[#777467]">
-              Prognition is working with your note…
+  Our AI service may take up to one minute to respond while the
+  server wakes up. Thank you for your patience!
             </p>
           </div>
         )}
