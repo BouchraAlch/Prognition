@@ -6,14 +6,15 @@ import type { FormEvent } from "react";
 const TOPICS = ["Question", "Bug", "Feedback", "Account"] as const;
 
 const INPUT =
-  "w-full rounded-lg border border-[#E6DDF8] bg-[#FAF7FF] px-3 py-2.5 text-sm text-[#240765] placeholder:text-[#240765]/35 outline-none transition duration-200 focus:border-[#3A0CA3] focus:bg-white focus:ring-2 focus:ring-[#3A0CA3]/10";
+  "w-full rounded-lg border border-[#DED5C5] bg-[#F8F5ED] px-3 py-2.5 text-sm text-[#353B2E] placeholder:text-[#353B2E]/40 outline-none transition duration-200 focus:border-[#667653] focus:bg-white focus:ring-2 focus:ring-[#667653]/15";
 
-const LABEL = "mb-1 block text-xs font-semibold text-[#240765]";
+const LABEL = "mb-1 block text-xs font-semibold text-[#353B2E]";
 
 export function SupportForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [topic, setTopic] = useState<(typeof TOPICS)[number]>("Question");
+  const [topic, setTopic] =
+    useState<(typeof TOPICS)[number]>("Question");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
@@ -46,7 +47,9 @@ export function SupportForm() {
       setMessage("");
       setTopic("Question");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setError(
+        err instanceof Error ? err.message : "Something went wrong."
+      );
     } finally {
       setLoading(false);
     }
@@ -56,16 +59,20 @@ export function SupportForm() {
     return (
       <div
         role="status"
-        className="mt-6 rounded-xl border border-[#4CC9A0]/50 bg-[#4CC9A0]/10 p-5"
+        className="mt-6 rounded-xl border border-[#667653]/30 bg-[#667653]/[0.08] p-5"
       >
-        <p className="text-sm font-bold text-[#240765]">Message sent</p>
-        <p className="mt-1 text-sm leading-6 text-[#240765]/70">
+        <p className="text-sm font-bold text-[#353B2E]">
+          Message sent successfully
+        </p>
+
+        <p className="mt-1 text-sm leading-6 text-[#353B2E]/70">
           Thanks for reaching out. We’ll reply to the email you provided.
         </p>
+
         <button
           type="button"
           onClick={() => setSent(false)}
-          className="mt-4 rounded-full border border-[#E6DDF8] bg-white px-4 py-2 text-xs font-semibold text-[#240765] transition hover:bg-[#F7F3FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]"
+          className="mt-4 rounded-full border border-[#DED5C5] bg-white px-4 py-2 text-xs font-semibold text-[#353B2E] transition hover:bg-[#F8F5ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#667653]"
         >
           Send another message
         </button>
@@ -74,12 +81,14 @@ export function SupportForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+    <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+      {/* Name and Email */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="support-name" className={LABEL}>
             Name
           </label>
+
           <input
             id="support-name"
             required
@@ -96,6 +105,7 @@ export function SupportForm() {
           <label htmlFor="support-email" className={LABEL}>
             Email
           </label>
+
           <input
             id="support-email"
             type="email"
@@ -109,21 +119,24 @@ export function SupportForm() {
         </div>
       </div>
 
+      {/* Topic */}
       <div>
         <span className={LABEL}>Topic</span>
+
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {TOPICS.map((option) => {
             const selected = topic === option;
+
             return (
               <button
                 key={option}
                 type="button"
                 aria-pressed={selected}
                 onClick={() => setTopic(option)}
-                className={`min-h-10 rounded-lg border px-2 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] ${
+                className={`min-h-10 rounded-lg border px-2 py-2 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] ${
                   selected
-                    ? "border-[#3A0CA3] bg-[#3A0CA3]/[0.07] text-[#3A0CA3] ring-1 ring-[#3A0CA3]/15"
-                    : "border-[#E6DDF8] bg-white text-[#240765]/65 hover:bg-[#F7F3FF]"
+                    ? "border-[#667653] bg-[#667653]/10 text-[#526344] ring-1 ring-[#667653]/20"
+                    : "border-[#DED5C5] bg-white text-[#353B2E]/65 hover:bg-[#F8F5ED]"
                 }`}
               >
                 {option}
@@ -133,10 +146,12 @@ export function SupportForm() {
         </div>
       </div>
 
+      {/* Message */}
       <div>
         <label htmlFor="support-message" className={LABEL}>
           Message
         </label>
+
         <textarea
           id="support-message"
           required
@@ -148,24 +163,27 @@ export function SupportForm() {
           className={`${INPUT} resize-y`}
           placeholder="Tell us what happened or what you need help with."
         />
-        <p className="mt-1 text-right text-[10px] text-[#240765]/45">
+
+        <p className="mt-1 text-right text-[10px] text-[#353B2E]/45">
           {message.length}/2000
         </p>
       </div>
 
+      {/* Error */}
       {error && (
         <p
           role="alert"
-          className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-xs leading-5 text-red-600"
+          className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs leading-5 text-red-700"
         >
           {error}
         </p>
       )}
 
+      {/* Submit */}
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#FACC15] px-6 py-3 text-sm font-bold text-[#240765] shadow-[0_4px_16px_rgba(250,204,21,0.30)] transition duration-200 hover:bg-[#FFE066] hover:shadow-[0_6px_20px_rgba(250,204,21,0.40)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3A0CA3] focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#667653] px-6 py-3 text-sm font-bold text-white shadow-[0_4px_16px_rgba(102,118,83,0.20)] transition duration-200 hover:bg-[#526344] hover:shadow-[0_6px_20px_rgba(82,99,68,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {loading ? "Sending..." : "Send message"}
       </button>

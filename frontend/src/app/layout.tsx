@@ -20,10 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
 
         <link
           rel="preconnect"
@@ -43,33 +40,77 @@ export default function RootLayout({
 
           .font-display {
             font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
           }
 
+          /* Main surfaces */
           .surface-card {
-            background: #ffffff;
-            border: 1px solid #ECECEC;
-            box-shadow: 0 8px 24px -12px rgba(17, 17, 17, 0.06);
+            background: #F8F5ED;
+            border: 1px solid #E5DCCB;
+            box-shadow: 0 4px 16px rgba(75, 61, 43, 0.04);
           }
 
+          /* Primary buttons */
           .btn-primary {
-            background: #111111;
-            color: #ffffff;
+            background: #667653;
+            color: #FFFFFF;
+            transition: background 200ms ease;
           }
 
           .btn-primary:hover {
-            background: #000000;
+            background: #526344;
           }
 
+          /* Secondary buttons */
           .btn-secondary {
             background: transparent;
-            color: #111111;
-            border: 1.5px solid #111111;
+            color: #795C42;
+            border: 1px solid #B9A68D;
+            transition: all 200ms ease;
           }
 
           .btn-secondary:hover {
-            background: #111111;
-            color: #ffffff;
+            background: #EAE3D5;
+            border-color: #795C42;
+          }
+
+          /* Global selection */
+          ::selection {
+            background: #667653;
+            color: #FFFFFF;
+          }
+
+          /* Scrollbar */
+          * {
+            scrollbar-color: #B9A68D #F3EBDD;
+            scrollbar-width: thin;
+          }
+
+          /* Portfolio notice animation */
+          @keyframes portfolio-marquee {
+            from {
+              transform: translateX(100vw);
+            }
+            to {
+              transform: translateX(-100%);
+            }
+          }
+
+          .portfolio-marquee {
+            width: max-content;
+            animation: portfolio-marquee 24s linear infinite;
+            will-change: transform;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .portfolio-marquee {
+              animation: none;
+              transform: none;
+              width: 100%;
+              justify-content: center;
+              white-space: normal;
+              text-align: center;
+            }
           }
         `}</style>
       </head>
@@ -79,23 +120,56 @@ export default function RootLayout({
           relative
           min-h-screen
           w-full
-          bg-[#F7F3EA]
-          text-[#111111]
+          bg-[#F3EBDD]
+          text-[#353B2E]
           font-sans
           antialiased
-          selection:bg-black
+          selection:bg-[#667653]
           selection:text-white
           overflow-x-hidden
         "
       >
+        {/* PORTFOLIO NOTICE BAR */}
+        <div
+          className="
+            fixed
+            top-0
+            left-0
+            z-[60]
+            flex
+            h-9
+            w-full
+            items-center
+            overflow-hidden
+            bg-[#795C42]
+            text-[#F8F5ED]
+          "
+          role="status"
+          aria-label="Portfolio project notice"
+        >
+          <div className="portfolio-marquee flex items-center whitespace-nowrap">
+            <span className="px-8 text-[10px] font-medium tracking-[0.08em] sm:text-xs">
+              PORTFOLIO PROJECT
+              <span className="mx-3 text-[#D9C3A8]">•</span>
+              Demonstration website showcasing AI-powered learning and
+              productivity features.
+              <span className="mx-3 text-[#D9C3A8]">•</span>
+              Please avoid entering personal or sensitive information.
+            </span>
+          </div>
+        </div>
+
+        {/* NAVBAR */}
         <div className="relative z-20">
           <Navbar />
         </div>
 
-        <main className="relative z-10 ">
+        {/* PAGE CONTENT */}
+        <main className="relative z-10">
           {children}
         </main>
 
+        {/* FOOTER */}
         <div className="relative z-20">
           <ConditionalFooter />
         </div>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { FormEvent, useState } from "react";
@@ -6,9 +7,12 @@ import { signInWithGoogle } from "@/lib/auth";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const INPUT =
-  "w-full rounded-lg border border-[#E6DDF8] bg-[#FAF7FF] px-3.5 py-3 text-sm text-[#240765] outline-none transition duration-200 placeholder:text-[#240765]/35 focus:border-[#3A0CA3] focus:bg-white focus:ring-2 focus:ring-[#3A0CA3]/10";
+  "w-full rounded-lg border border-[#DED5C5] bg-[#F8F5ED] px-3.5 py-3 text-sm text-[#353B2E] outline-none transition duration-200 placeholder:text-[#353B2E]/40 focus:border-[#667653] focus:bg-white focus:ring-2 focus:ring-[#667653]/15";
 
-const LABEL = "mb-1.5 block text-xs font-semibold text-[#240765]";
+const LABEL = "mb-1.5 block text-xs font-semibold text-[#353B2E]";
+
+const DEMO_EMAIL = "test@gmail.com";
+const DEMO_PASSWORD = "test123";
 
 function GoogleIcon() {
   return (
@@ -45,6 +49,12 @@ export default function LoginPage() {
   const [googleLoading, setGoogleLoading] = useState(false);
 
   const busy = loading || googleLoading;
+
+  const handleDemoLogin = () => {
+    setEmail(DEMO_EMAIL);
+    setPassword(DEMO_PASSWORD);
+    setError("");
+  };
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,28 +97,68 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="relative z-10 flex min-h-[calc(100vh-80px)] items-start justify-center px-5 pb-16 pt-24 sm:pt-28">
+    <main className="relative z-10 flex min-h-[calc(100vh-80px)] items-start justify-center bg-[#F8F5ED] px-5 pb-16 pt-24 sm:pt-28">
       <div className="w-full max-w-md">
+
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-[#240765] sm:text-4xl">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#667653]">
+            Welcome back
+          </span>
+
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#353B2E] sm:text-4xl">
             Welcome back
           </h1>
 
-          <p className="mt-3 text-sm text-[#240765]/60">
+          <p className="mt-3 text-sm text-[#353B2E]/60">
             Log in to continue to{" "}
-            <span className="font-bold text-[#7209B7]">Prognition</span>
+            <span className="font-bold text-[#667653]">
+              Prognition
+            </span>
           </p>
         </div>
 
-        {/* Login card */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#E6DDF8] bg-white p-6 pt-8 shadow-xl shadow-[#240765]/[0.06] sm:p-8 sm:pt-10">
-          {/* Brand accent bar */}
-          <div className="absolute inset-x-0 top-0 flex h-[3px]">
-            <span className="flex-1 bg-[#F72585]" />
-            <span className="flex-1 bg-[#FACC15]" />
-            <span className="flex-1 bg-[#4CC9A0]" />
-            <span className="flex-1 bg-[#A78BFA]" />
+        {/* Login Card */}
+        <div className="relative overflow-hidden rounded-3xl border border-[#DED5C5] bg-white p-6 pt-8 shadow-xl shadow-[#353B2E]/[0.05] sm:p-8 sm:pt-10">
+
+          {/* Demo Account */}
+          <div className="mb-5 rounded-2xl border border-[#667653]/25 bg-[#F8F5ED] p-4">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <p className="text-sm font-bold text-[#353B2E]">
+                  Explore the demo account
+                </p>
+                <p className="mt-1 text-xs text-[#353B2E]/60">
+                  Try Prognition with preloaded learning materials
+                  and AI features.
+                </p>
+              </div>
+
+              <span className="shrink-0 rounded-full bg-[#667653]/10 px-2.5 py-1 text-[10px] font-bold text-[#526344]">
+                DEMO
+              </span>
+            </div>
+
+            <div className="mt-3 space-y-1.5 text-xs text-[#353B2E]/75">
+              <p>
+                <span className="font-semibold">Email:</span>{" "}
+                {DEMO_EMAIL}
+              </p>
+              <p>
+                <span className="font-semibold">Password:</span>{" "}
+                {DEMO_PASSWORD}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleDemoLogin}
+              disabled={busy}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-[#667653] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#526344] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Use demo account
+              <span>→</span>
+            </button>
           </div>
 
           {/* Google */}
@@ -116,7 +166,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={busy}
-            className="flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-[#E6DDF8] bg-white px-5 py-3 text-sm font-semibold text-[#240765] transition-colors duration-200 hover:border-[#A78BFA] hover:bg-[#FAF7FF] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex min-h-11 w-full items-center justify-center gap-3 rounded-full border border-[#DED5C5] bg-white px-5 py-3 text-sm font-semibold text-[#353B2E] transition-colors duration-200 hover:border-[#667653] hover:bg-[#F8F5ED] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <GoogleIcon />
             {googleLoading ? "Redirecting to Google..." : "Continue with Google"}
@@ -124,17 +174,20 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="my-6 flex items-center gap-4">
-            <div className="h-px flex-1 bg-[#E6DDF8]" />
-            <span className="text-xs text-[#240765]/45">or use your email</span>
-            <div className="h-px flex-1 bg-[#E6DDF8]" />
+            <div className="h-px flex-1 bg-[#DED5C5]" />
+            <span className="text-xs text-[#353B2E]/45">
+              or use your email
+            </span>
+            <div className="h-px flex-1 bg-[#DED5C5]" />
           </div>
 
-          {/* Email / Password form */}
+          {/* Login Form */}
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label htmlFor="login-email" className={LABEL}>
                 Email
               </label>
+
               <input
                 id="login-email"
                 type="email"
@@ -151,6 +204,7 @@ export default function LoginPage() {
               <label htmlFor="login-password" className={LABEL}>
                 Password
               </label>
+
               <input
                 id="login-password"
                 type="password"
@@ -166,40 +220,40 @@ export default function LoginPage() {
             {error && (
               <p
                 role="alert"
-                className="rounded-lg border border-red-100 bg-red-50 px-3 py-2.5 text-center text-sm text-red-600"
+                className="rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-center text-sm text-red-700"
               >
                 {error}
               </p>
             )}
 
-            {/* Log in */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={busy}
-              className="flex min-h-11 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#3A0CA3] to-[#7209B7] px-5 py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(114,9,183,0.30)] transition duration-200 hover:from-[#F72585] hover:to-[#7209B7] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex min-h-11 w-full items-center justify-center rounded-full bg-[#667653] px-5 py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(102,118,83,0.20)] transition duration-200 hover:bg-[#526344] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Logging in..." : "Log in"}
             </button>
           </form>
 
-          {/* Sign up */}
-          <p className="mt-6 text-center text-sm text-[#240765]/65">
+          {/* Signup */}
+          <p className="mt-6 text-center text-sm text-[#353B2E]/65">
             Don’t have an account?{" "}
             <Link
               href="/signup"
-              className="font-semibold text-[#7209B7] underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]"
+              className="font-semibold text-[#667653] underline-offset-4 hover:text-[#526344] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653]"
             >
               Sign up
             </Link>
           </p>
         </div>
 
-        {/* Support link */}
-        <p className="mt-6 text-center text-xs text-[#240765]/45">
+        {/* Support */}
+        <p className="mt-6 text-center text-xs text-[#353B2E]/45">
           Need help?{" "}
           <Link
             href="/support"
-            className="font-medium text-[#240765]/65 underline-offset-4 hover:underline"
+            className="font-medium text-[#526344] underline-offset-4 hover:underline"
           >
             Contact support
           </Link>

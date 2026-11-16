@@ -60,13 +60,15 @@ export function TopicsPanel({
   }
 
   return (
-    <aside className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#F72585]/30 bg-[#F72585]/[0.04] md:max-h-[calc(100vh-7rem)]">
-      <span className="absolute inset-x-0 top-0 h-[3px] bg-[#F72585]" />
+    <aside className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#DED5C5] bg-[#F8F5ED] shadow-sm md:max-h-[calc(100vh-7rem)]">
+      <span className="absolute inset-x-0 top-0 h-[3px] bg-[#242820]" />
 
-      <div className="flex items-center justify-between gap-2 border-b border-[#21005e]/10 px-4 pb-4 pt-5">
+      <div className="flex items-center justify-between gap-2 border-b border-[#DED5C5] px-4 pb-4 pt-5">
         <div>
-          <h2 className="text-sm font-extrabold text-[#21005e]">Topics</h2>
-          <p className="mt-0.5 text-xs text-[#21005e]/55">
+          <h2 className="text-sm font-extrabold text-[#353B2E]">
+            Topics
+          </h2>
+          <p className="mt-0.5 text-xs text-[#777467]">
             {topics.length} {topics.length === 1 ? "topic" : "topics"}
           </p>
         </div>
@@ -79,12 +81,12 @@ export function TopicsPanel({
           }}
           aria-expanded={creating}
           className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-bold
-            transition-[background-color,box-shadow] duration-200
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]
-            focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
+            transition-colors duration-200
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-[#242820]
+            focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8F5ED] ${
               creating
-                ? "border border-[#21005e]/25 bg-white text-[#21005e] hover:bg-[#21005e]/[0.06]"
-                : "bg-[#F72585] text-white shadow-[0_7px_24px_rgba(247,37,133,0.22)] hover:bg-[#E01E78] hover:shadow-[0_8px_25px_rgba(247,37,133,0.32)]"
+                ? "border border-[#DED5C5] bg-white text-[#353B2E] hover:bg-[#E5D7C1]/30"
+                : "bg-[#242820] text-white shadow-sm hover:bg-[#353B2E] hover:shadow-md"
             }`}
         >
           <span className="text-base leading-none">
@@ -97,11 +99,11 @@ export function TopicsPanel({
       {creating && (
         <form
           onSubmit={handleCreate}
-          className="border-b border-[#21005e]/10 bg-white/70 p-3"
+          className="border-b border-[#DED5C5] bg-[#F3EBDD] p-3"
         >
           <label
             htmlFor="new-topic-title"
-            className="mb-2 block text-xs font-semibold text-[#21005e]/70"
+            className="mb-2 block text-xs font-semibold text-[#242820]"
           >
             Topic name
           </label>
@@ -113,14 +115,14 @@ export function TopicsPanel({
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Introduction to AI"
             maxLength={120}
-            className="w-full rounded-xl border border-[#21005e]/15 bg-white
-              px-3 py-2.5 text-sm text-[#21005e] outline-none
-              placeholder:text-[#21005e]/35 focus:border-[#F72585]
-              focus:ring-2 focus:ring-[#FACC15]/40"
+            className="w-full rounded-xl border border-[#DED5C5] bg-[#F8F5ED]
+              px-3 py-2.5 text-sm text-[#171717] outline-none
+              placeholder:text-[#777467]/65 focus:border-[#242820]
+              focus:ring-2 focus:ring-[#242820]/15"
           />
 
           {error && (
-            <p role="alert" className="mt-2 text-xs text-red-600">
+            <p role="alert" className="mt-2 text-xs text-[#98604F]">
               {error}
             </p>
           )}
@@ -129,9 +131,9 @@ export function TopicsPanel({
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="rounded-full bg-[#F72585] px-4 py-2 text-xs font-bold
-                text-white transition-colors duration-200 hover:bg-[#E01E78]
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]
+              className="rounded-full bg-[#242820] px-4 py-2 text-xs font-bold
+                text-white transition-colors duration-200 hover:bg-[#353B2E]
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#242820]
                 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loading ? "Creating…" : "Create topic"}
@@ -145,8 +147,9 @@ export function TopicsPanel({
                 setError("");
               }}
               className="rounded-full px-3 py-2 text-xs font-semibold
-                text-[#21005e]/70 transition-colors hover:bg-[#21005e]/[0.06]
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]"
+                text-[#777467] transition-colors hover:bg-[#E5D7C1]/50
+                hover:text-[#353B2E]
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#242820]"
             >
               Cancel
             </button>
@@ -157,7 +160,7 @@ export function TopicsPanel({
       <div className="min-h-0 flex-1 overflow-y-auto p-2">
         {topics.length === 0 ? (
           <div className="px-3 py-8 text-center">
-            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F72585]/10 text-[#F72585]">
+            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#242820]/10 text-[#242820]">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -169,10 +172,11 @@ export function TopicsPanel({
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </div>
-            <p className="text-sm font-bold text-[#21005e]">
+
+            <p className="text-sm font-bold text-[#353B2E]">
               No topics yet
             </p>
-            <p className="mt-1 text-xs leading-5 text-[#21005e]/60">
+            <p className="mt-1 text-xs leading-5 text-[#777467]">
               Create your first topic to organize your notes.
             </p>
           </div>
@@ -190,24 +194,26 @@ export function TopicsPanel({
                     className={`group flex w-full min-w-0 items-center gap-2.5
                       rounded-xl border px-3 py-3 text-left text-sm
                       transition-colors duration-200
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] ${
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-[#242820] ${
                         active
-                          ? "border-[#F72585]/40 bg-white font-bold text-[#21005e]"
-                          : "border-transparent text-[#21005e]/70 hover:bg-white/80 hover:text-[#21005e]"
+                          ? "border-[#B9A68D] bg-[#E5D7C1]/35 font-bold text-[#242820]"
+                          : "border-transparent text-[#526344] hover:bg-[#E5D7C1]/25 hover:text-[#242820]"
                       }`}
                   >
                     <span
                       className={`h-2 w-2 shrink-0 rounded-full ${
                         active
-                          ? "bg-[#F72585]"
-                          : "bg-[#21005e]/20 group-hover:bg-[#A78BFA]"
+                          ? "bg-[#242820]"
+                          : "bg-[#B9A68D] group-hover:bg-[#242820]"
                       }`}
                     />
+
                     <span className="min-w-0 flex-1 truncate">
                       {topic.title}
                     </span>
+
                     {active && (
-                      <span className="text-xs text-[#F72585]">→</span>
+                      <span className="text-xs text-[#242820]">→</span>
                     )}
                   </button>
                 </li>

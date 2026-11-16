@@ -1,8 +1,11 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { TopicsPanel } from "./TopicsPanel";
 import { NoteWorkspace } from "./NoteWorkspace";
+
 import type { Topic } from "@/lib/types/database";
 
 interface Props {

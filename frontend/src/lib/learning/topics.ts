@@ -44,3 +44,32 @@ export async function createTopic(subjectId: string, title: string): Promise<Top
   if (error) throw new Error(error.message);
   return data as Topic;
 }
+
+
+export async function deleteTopic(
+  topicId: string,
+  subjectId: string
+): Promise<void> {
+  const supabase = await createSupabaseServerClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Not authenticated");
+
+  const { data, error } = await supabase
+    .from("topics")
+    .delete()
+    .eq("id", topicId)
+    .eq("subject_id", subjectId)
+    .eq("user_id", user.id)
+    .select("id")
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+
+  if (!data) {
+    throw new Error("Topic not found or you don't have permission to delete it.");
+  }
+}

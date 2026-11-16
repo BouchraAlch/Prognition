@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -213,7 +214,9 @@ export default function Navbar() {
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -272,46 +275,35 @@ export default function Navbar() {
   };
 
   /* =========================
-     THEME COLORS
+     COLORS
   ========================= */
 
-  // Home page: dark glass over the purple hero.
-  // Every other page: white bar with deep-purple (#240765) ink.
-  // Accents: pink #F72585, yellow #FACC15, purple #3A0CA3 / #7209B7.
-
   const navbarBackground = isHomePage
-    ? "bg-black/25 border-white/10 backdrop-blur-md"
-    : "bg-white/95 border-[#E6DDF8] backdrop-blur-xl";
+    ? "bg-[#F3EBDD]/85 border-[#DED5C5]/70 backdrop-blur-md"
+    : "bg-[#F3EBDD]/95 border-[#DED5C5] backdrop-blur-xl";
 
-  const navTextColor = isHomePage ? "text-white" : "text-[#240765]";
+  const navTextColor = "text-[#353B2E]";
 
-  const navLinkColor = isHomePage
-    ? "text-white/90 hover:text-[#FACC15]"
-    : "text-[#240765]/75 hover:text-[#F72585]";
+  const navLinkColor =
+    "text-[#68675B] hover:text-[#667653]";
 
-  const navBorderColor = isHomePage
-    ? "border-white/40 hover:border-[#FACC15]"
-    : "border-[#240765]/20 hover:border-[#F72585]";
+  const navBorderColor =
+    "border-[#B9A68D] hover:border-[#667653]";
 
-  // Yellow CTA on both themes, same as "New Subject" in the app.
-  const loginButtonColor = isHomePage
-    ? "bg-[#FACC15] text-[#240765] hover:bg-[#FFE066] shadow-[0_4px_16px_rgba(250,204,21,0.20)]"
-    : "bg-[#FACC15] text-[#240765] hover:bg-[#FFE066] shadow-[0_4px_16px_rgba(250,204,21,0.30)]";
+  const loginButtonColor =
+    "bg-[#1F1F1B] text-white hover:bg-[#353B2E] shadow-sm";
 
-  const signupButtonColor = isHomePage
-    ? "bg-white/5 text-white border border-white/40 hover:bg-[#F72585]/15 hover:border-[#F72585]"
-    : "bg-gradient-to-r from-[#3A0CA3] to-[#7209B7] text-white shadow-[0_4px_14px_rgba(114,9,183,0.30)] hover:from-[#F72585] hover:to-[#7209B7]";
+  const signupButtonColor =
+    "bg-transparent text-[#795C42] border border-[#B9A68D] hover:bg-[#EAE3D5] hover:border-[#795C42]";
 
-  const profileButtonColor = isHomePage
-    ? "border border-[#FACC15]/60 bg-gradient-to-br from-[#3A0CA3] to-[#7209B7] text-[#FACC15] shadow-[0_0_18px_rgba(247,37,133,0.22)] hover:border-[#FACC15] hover:shadow-[0_0_22px_rgba(250,204,21,0.20)]"
-    : "border border-[#3A0CA3]/25 bg-gradient-to-br from-[#3A0CA3]/[0.08] to-[#F72585]/[0.08] text-[#240765] shadow-[0_4px_18px_rgba(36,7,101,0.10)] hover:border-[#F72585]/50 hover:shadow-[0_4px_20px_rgba(247,37,133,0.18)]";
+  const profileButtonColor =
+    "border border-[#D9CFBD] bg-[#EAE3D5] text-[#667653] hover:bg-[#E2DACB] hover:border-[#667653]";
 
-  const mobileMenuButtonColor = isHomePage
-    ? "text-white border-white/30 bg-black/20 hover:bg-[#F72585]/20 hover:border-[#FACC15]/70"
-    : "text-[#240765] border-[#240765]/20 bg-[#240765]/[0.04] hover:border-[#F72585]";
+  const mobileMenuButtonColor =
+    "text-[#353B2E] border-[#DED5C5] bg-[#F8F5ED] hover:bg-[#EAE3D5]";
 
   const focusRing =
-    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD]";
 
   /* =========================
      RENDER
@@ -319,22 +311,36 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-        navbarBackground
-      } ${scrolled ? "py-2.5" : "py-4"}`}
+      className={`
+        fixed top-9 left-0 right-0 z-50
+        border-b transition-all duration-300
+        ${navbarBackground}
+        ${scrolled ? "shadow-sm" : ""}
+      `}
     >
-      <div className="max-w-6xl mx-auto px-5 flex items-center justify-between">
+      <div
+        className={`
+          mx-auto flex max-w-6xl items-center justify-between px-5
+          transition-all duration-300
+          ${scrolled ? "py-1" : "py-1.5"}
+        `}
+      >
         {/* LOGO */}
-        <Link href="/" className={`flex items-center shrink-0 rounded-lg ${focusRing}`}>
+
+        <Link
+          href="/"
+          className={`flex shrink-0 items-center rounded-lg ${focusRing}`}
+        >
           <img
             src="/logo.png"
             alt="Prognition"
-            className="h-10 w-auto object-contain"
+            className="h-7 w-auto object-contain"
           />
         </Link>
 
         {/* DESKTOP NAVIGATION */}
-        <nav className="hidden md:flex items-center gap-8">
+
+        <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
             className={`text-xs font-semibold transition-colors ${navLinkColor} ${focusRing}`}
@@ -358,54 +364,82 @@ export default function Navbar() {
         </nav>
 
         {/* DESKTOP RIGHT SIDE */}
-        <div className="hidden md:flex items-center gap-3">
+
+        <div className="hidden items-center gap-3 md:flex">
           {!isLoggedIn ? (
             <>
               <Link
                 href="/signup"
-                className={`px-4 py-2 rounded-full text-xs font-bold border transition-all duration-200 ${navTextColor} ${navBorderColor} ${focusRing} ${
-                  isHomePage
-                    ? "hover:bg-[#F72585]/10"
-                    : "hover:bg-[#F72585]/[0.07]"
-                }`}
+                className={`
+                  rounded-full border px-4 py-1.5
+                  text-xs font-semibold
+                  transition-all duration-200
+                  ${navTextColor}
+                  ${navBorderColor}
+                  ${signupButtonColor}
+                  ${focusRing}
+                `}
               >
                 Sign Up
               </Link>
 
               <Link
                 href="/login"
-                className={`group px-5 py-2 rounded-full text-xs font-bold transition-all duration-200 flex items-center gap-1.5 ${loginButtonColor} ${focusRing}`}
+                className={`
+                  group flex items-center gap-2
+                  rounded-full px-5 py-1.5
+                  text-xs font-semibold
+                  transition-all duration-200
+                  ${loginButtonColor}
+                  ${focusRing}
+                `}
               >
                 <span>Log in</span>
-                <ArrowRightIcon className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+
+                <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </>
           ) : (
             <div ref={profileMenuRef} className="relative">
               <button
                 type="button"
-                onClick={() => setProfileMenuOpen((open) => !open)}
+                onClick={() =>
+                  setProfileMenuOpen((open) => !open)
+                }
                 aria-label="Open profile menu"
                 aria-expanded={profileMenuOpen}
-                className={`relative w-10 h-10 rounded-full border flex items-center justify-center overflow-hidden transition-all duration-200 ${profileButtonColor} ${focusRing}`}
+                className={`
+                  flex h-8 w-8 items-center justify-center
+                  rounded-full border transition-all duration-200
+                  ${profileButtonColor}
+                  ${focusRing}
+                `}
               >
-                <span
-                  className="absolute inset-0 rounded-full blur-md bg-gradient-to-br from-[#FACC15]/35 via-[#F72585]/30 to-[#7209B7]/40"
-                />
-
-                <span
-                  className="absolute inset-[2px] rounded-full bg-gradient-to-br from-[#3A0CA3] via-[#560BAD] to-[#7209B7]"
-                />
-
-                <ProfileIcon className="relative z-10 w-5 h-5 text-[#FACC15] drop-shadow-[0_0_6px_rgba(250,204,21,0.55)]" />
+                <ProfileIcon className="h-4 w-4" />
               </button>
 
               {profileMenuOpen && (
-                <div className="absolute right-0 top-12 w-48 rounded-2xl border border-[#E6DDF8] bg-white shadow-xl shadow-[#240765]/15 p-1.5 text-[#240765]">
+                <div
+                  className="
+                    absolute right-0 top-10 w-48
+                    rounded-xl border border-[#DED5C5]
+                    bg-[#F8F5ED] p-1.5
+                    text-[#353B2E]
+                    shadow-lg shadow-[#4B3D2B]/10
+                  "
+                >
                   <Link
                     href="/settings"
                     onClick={() => setProfileMenuOpen(false)}
-                    className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-[#240765] hover:bg-[#F72585]/10 hover:text-[#7209B7] transition-colors"
+                    className="
+                      flex w-full items-center gap-2.5
+                      rounded-lg px-3 py-2.5
+                      text-sm font-medium
+                      text-[#68675B]
+                      transition-colors
+                      hover:bg-[#EAE3D5]
+                      hover:text-[#667653]
+                    "
                   >
                     <SettingsIcon />
                     <span>Settings</span>
@@ -414,7 +448,14 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                    className="
+                      flex w-full items-center gap-2.5
+                      rounded-lg px-3 py-2.5
+                      text-sm font-medium
+                      text-[#98604F]
+                      transition-colors
+                      hover:bg-[#F0E4DA]
+                    "
                   >
                     <LogoutIcon />
                     <span>Log out</span>
@@ -426,27 +467,57 @@ export default function Navbar() {
         </div>
 
         {/* MOBILE MENU BUTTON */}
-        <div className="flex md:hidden items-center gap-2">
+
+        <div className="flex items-center gap-2 md:hidden">
           <button
             type="button"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-            className={`p-2 rounded-xl border backdrop-blur-xl transition-all duration-200 ${mobileMenuButtonColor} ${focusRing}`}
+            onClick={() =>
+              setMobileMenuOpen((open) => !open)
+            }
+            className={`
+              rounded-lg border p-1.5
+              transition-all duration-200
+              ${mobileMenuButtonColor}
+              ${focusRing}
+            `}
             aria-label="Toggle navigation"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            {mobileMenuOpen ? (
+              <CloseIcon className="h-4 w-4" />
+            ) : (
+              <MenuIcon className="h-4 w-4" />
+            )}
           </button>
         </div>
       </div>
 
       {/* MOBILE MENU */}
+
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-[#E6DDF8] px-5 py-4 space-y-3 shadow-[0_16px_30px_rgba(36,7,101,0.10)] text-[#240765]">
+        <div
+          className="
+            absolute left-0 right-0 top-full
+            border-b border-[#DED5C5]
+            bg-[#F3EBDD]/98 px-5 py-4
+            text-[#353B2E]
+            shadow-lg shadow-[#4B3D2B]/5
+            backdrop-blur-xl
+            md:hidden
+          "
+        >
           <nav className="flex flex-col space-y-1">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-semibold py-3 px-3 rounded-xl hover:bg-[#F72585]/10 hover:text-[#7209B7] transition-colors"
+              className="
+                rounded-lg px-3 py-3
+                text-sm font-semibold
+                text-[#68675B]
+                transition-colors
+                hover:bg-[#EAE3D5]
+                hover:text-[#667653]
+              "
             >
               Home
             </Link>
@@ -454,7 +525,14 @@ export default function Navbar() {
             <Link
               href="/learning"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-semibold py-3 px-3 rounded-xl hover:bg-[#F72585]/10 hover:text-[#7209B7] transition-colors"
+              className="
+                rounded-lg px-3 py-3
+                text-sm font-semibold
+                text-[#68675B]
+                transition-colors
+                hover:bg-[#EAE3D5]
+                hover:text-[#667653]
+              "
             >
               Learning hub
             </Link>
@@ -462,7 +540,14 @@ export default function Navbar() {
             <a
               href={isHomePage ? "#workspaces" : "/#workspaces"}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-semibold py-3 px-3 rounded-xl hover:bg-[#F72585]/10 hover:text-[#7209B7] transition-colors"
+              className="
+                rounded-lg px-3 py-3
+                text-sm font-semibold
+                text-[#68675B]
+                transition-colors
+                hover:bg-[#EAE3D5]
+                hover:text-[#667653]
+              "
             >
               Workspaces
             </a>
@@ -470,24 +555,36 @@ export default function Navbar() {
             <Link
               href="/support"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-semibold py-3 px-3 rounded-xl hover:bg-[#F72585]/10 hover:text-[#7209B7] transition-colors"
+              className="
+                rounded-lg px-3 py-3
+                text-sm font-semibold
+                text-[#68675B]
+                transition-colors
+                hover:bg-[#EAE3D5]
+                hover:text-[#667653]
+              "
             >
               Support
             </Link>
           </nav>
 
           {/* MOBILE AUTHENTICATION */}
-          <div className="pt-4 border-t border-[#E6DDF8] flex flex-col space-y-2">
+
+          <div className="mt-3 flex flex-col space-y-2 border-t border-[#DED5C5] pt-4">
             {!isLoggedIn ? (
               <>
                 <Link
                   href="/signup"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`w-full text-xs font-bold py-3 rounded-full text-center transition-all duration-200 ${
-                    isHomePage
-                      ? "bg-[#F72585] text-white hover:bg-[#D91A70]"
-                      : signupButtonColor
-                  }`}
+                  className="
+                    w-full rounded-full border
+                    border-[#B9A68D]
+                    py-3 text-center
+                    text-xs font-semibold
+                    text-[#795C42]
+                    transition-colors
+                    hover:bg-[#EAE3D5]
+                  "
                 >
                   Sign Up
                 </Link>
@@ -495,30 +592,56 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`w-full text-xs font-bold py-3 rounded-full text-center transition-colors ${loginButtonColor}`}
+                  className={`
+                    w-full rounded-full py-3
+                    text-center text-xs font-semibold
+                    transition-colors
+                    ${loginButtonColor}
+                  `}
                 >
                   Log in
                 </Link>
               </>
             ) : (
               <>
-                <div className="flex items-center gap-3 rounded-xl border border-[#F72585]/20 bg-gradient-to-r from-[#3A0CA3]/[0.05] to-[#F72585]/[0.06] p-3">
-                  <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-[#FACC15]/60 bg-gradient-to-br from-[#3A0CA3] via-[#560BAD] to-[#7209B7] shadow-[0_0_18px_rgba(247,37,133,0.18)]">
-                    <ProfileIcon className="w-5 h-5 text-[#FACC15]" />
+                <div
+                  className="
+                    flex items-center gap-3
+                    rounded-xl border border-[#DED5C5]
+                    bg-[#F8F5ED] p-3
+                  "
+                >
+                  <span
+                    className="
+                      flex h-10 w-10 items-center justify-center
+                      rounded-full border border-[#D9CFBD]
+                      bg-[#EAE3D5] text-[#667653]
+                    "
+                  >
+                    <ProfileIcon className="h-5 w-5" />
                   </span>
 
                   <div>
-                    <p className="text-sm font-semibold text-[#240765]">
+                    <p className="text-sm font-semibold text-[#353B2E]">
                       Your account
                     </p>
-                    <p className="text-xs text-[#240765]/60">Signed in</p>
+
+                    <p className="text-xs text-[#777467]">
+                      Signed in
+                    </p>
                   </div>
                 </div>
 
                 <Link
                   href="/settings"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 border border-[#240765]/15 bg-[#240765]/[0.03] text-xs font-bold text-[#240765] py-3 rounded-full hover:bg-[#F72585]/[0.07] hover:border-[#F72585]/30 transition-colors"
+                  className="
+                    flex w-full items-center justify-center gap-2
+                    rounded-full border border-[#B9A68D]
+                    bg-transparent py-3
+                    text-xs font-semibold text-[#795C42]
+                    transition-colors hover:bg-[#EAE3D5]
+                  "
                 >
                   <SettingsIcon />
                   Settings
@@ -527,7 +650,12 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 text-xs font-bold py-3 rounded-full hover:bg-red-100 transition-colors"
+                  className="
+                    flex w-full items-center justify-center gap-2
+                    rounded-full bg-[#F0E4DA] py-3
+                    text-xs font-semibold text-[#98604F]
+                    transition-colors hover:bg-[#E9D7CA]
+                  "
                 >
                   <LogoutIcon />
                   Log out

@@ -19,11 +19,7 @@ interface Props {
 
 type SaveState = "idle" | "saving" | "saved" | "error";
 
-export function NoteEditor({
-  noteId,
-  initialContent,
-  title,
-}: Props) {
+export function NoteEditor({ noteId, initialContent, title }: Props) {
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [aiOpen, setAiOpen] = useState(false);
 
@@ -51,7 +47,7 @@ export function NoteEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-slate max-w-none min-h-[55vh] px-5 py-6 text-[#21005e]/85 prose-headings:font-extrabold prose-headings:text-[#21005e] prose-a:text-[#F72585] prose-strong:text-[#21005e] prose-blockquote:border-[#A78BFA] prose-code:text-[#F72585] focus:outline-none sm:px-8 sm:py-8",
+          "prose prose-slate max-w-none min-h-[55vh] px-5 py-6 text-[#171717] prose-headings:font-extrabold prose-headings:text-[#171717] prose-p:text-[#171717] prose-li:text-[#171717] prose-a:text-[#667653] prose-strong:text-[#171717] prose-blockquote:border-[#B9A68D] prose-code:text-[#795C42] focus:outline-none sm:px-8 sm:py-8",
       },
     },
     onUpdate: ({ editor }) => {
@@ -120,21 +116,21 @@ export function NoteEditor({
         <section className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
             <div className="min-w-0">
-              <h2 className="truncate text-base font-extrabold tracking-tight text-[#21005e] sm:text-lg">
+              <h2 className="truncate text-base font-extrabold tracking-tight text-[#353B2E] sm:text-lg">
                 {title || "My note"}
               </h2>
 
-              <div className="mt-1 flex items-center gap-2 text-xs text-[#21005e]/60">
+              <div className="mt-1 flex items-center gap-2 text-xs text-[#777467]">
                 <span className="flex h-2 w-2 items-center justify-center">
                   <span
                     className={`h-1.5 w-1.5 rounded-full ${
                       saveState === "error"
-                        ? "bg-red-500"
+                        ? "bg-[#98604F]"
                         : saveState === "saving"
-                          ? "animate-pulse bg-[#FACC15]"
+                          ? "animate-pulse bg-[#B9A68D]"
                           : saveState === "saved"
-                            ? "bg-[#4CC9A0]"
-                            : "bg-[#21005e]/25"
+                            ? "bg-[#667653]"
+                            : "bg-[#B9A68D]"
                     }`}
                   />
                 </span>
@@ -151,14 +147,11 @@ export function NoteEditor({
               onClick={() => setAiOpen((open) => !open)}
               aria-expanded={aiOpen}
               aria-controls="note-ai-panel"
-              className={`inline-flex min-h-10 shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold
-                transition-[background-color,border-color,box-shadow] duration-200
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]
-                focus-visible:ring-offset-2 focus-visible:ring-offset-white ${
-                  aiOpen
-                    ? "border-[#21005e] bg-[#21005e] text-white hover:bg-[#360099]"
-                    : "border-transparent bg-[#F72585] text-white shadow-[0_7px_24px_rgba(247,37,133,0.22)] hover:bg-[#E01E78] hover:shadow-[0_8px_25px_rgba(247,37,133,0.32)]"
-                }`}
+              className={`inline-flex min-h-10 shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#667653] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] ${
+                aiOpen
+                  ? "border-[#242820] bg-[#242820] text-white hover:bg-[#353B2E]"
+                  : "border-transparent bg-[#667653] text-white shadow-sm hover:bg-[#526344] hover:shadow-md"
+              }`}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -183,23 +176,23 @@ export function NoteEditor({
 
           <div className="flex min-w-0 items-start gap-2 sm:gap-3">
             {/* EDITOR TOOLBAR */}
-            <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] shrink-0 overflow-y-auto rounded-xl border border-[#21005e]/12 bg-white sm:block">
+            <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] shrink-0 overflow-y-auto rounded-xl border border-[#DED5C5] bg-[#F8F5ED] shadow-sm sm:block">
               <EditorToolbar editor={editor} />
             </aside>
 
             {/* NOTE CONTENT */}
-            <div className="relative min-w-0 flex-1 overflow-hidden rounded-2xl border border-[#A78BFA]/35 bg-white transition-colors duration-200 focus-within:border-[#A78BFA]/70">
-              <span className="absolute inset-x-0 top-0 z-10 h-[3px] bg-[#A78BFA]" />
+            <div className="relative min-w-0 flex-1 overflow-hidden rounded-2xl border border-[#DED5C5] bg-[#F8F5ED] shadow-sm transition-colors duration-200 focus-within:border-[#B9A68D]">
+              <span className="absolute inset-x-0 top-0 z-10 h-[3px] bg-[#B9A68D]" />
 
               <EditorContent editor={editor} />
 
-              <div className="flex min-h-10 items-center justify-between gap-3 border-t border-[#21005e]/10 bg-[#A78BFA]/[0.06] px-4 py-2">
-                <span className="text-xs text-[#21005e]/55">
+              <div className="flex min-h-10 items-center justify-between gap-3 border-t border-[#DED5C5] bg-[#E5D7C1]/30 px-4 py-2">
+                <span className="text-xs text-[#777467]">
                   Changes are saved automatically
                 </span>
 
                 {saveState === "error" && (
-                  <span className="text-xs font-semibold text-red-600">
+                  <span className="text-xs font-semibold text-[#98604F]">
                     Save failed
                   </span>
                 )}

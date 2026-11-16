@@ -6,29 +6,28 @@ export const metadata: Metadata = {
   description: "Find answers, get started, or contact the Prognition team.",
 };
 
-const SUPPORT_EMAIL = "support@prognition.app";
 const RESPONSE_TIME = "We usually reply within 24 hours.";
 
 const STEPS = [
   {
     title: "Create a subject",
     body: "On the Learning page, select New Subject and add a title, cover image, and status.",
-    color: "#F72585",
+    color: "#667653",
   },
   {
     title: "Add topics",
     body: "Open a subject and select New topic to break it into manageable parts.",
-    color: "#FACC15",
+    color: "#B9A68D",
   },
   {
     title: "Write your notes",
     body: "Pick a topic and start writing. Your changes save automatically.",
-    color: "#4CC9A0",
+    color: "#795C42",
   },
   {
     title: "Learn with AI",
     body: "Open AI assistant in a note to get a summary, a 5-question quiz, or answers to your questions.",
-    color: "#A78BFA",
+    color: "#526344",
   },
 ];
 
@@ -61,42 +60,51 @@ const FAQS = [
 
 export default function SupportPage() {
   return (
-    <main className="min-h-screen bg-white text-[#240765]">
+    <main className="min-h-screen bg-[#F8F5ED] text-[#353B2E]">
       <div className="mx-auto max-w-5xl px-5 pb-20 pt-28 sm:px-8 sm:pt-32 lg:px-10">
+
         {/* Header */}
-        <header className="mb-12 border-b border-[#E6DDF8] pb-8">
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#7209B7]">
-            Support
+        <header className="mb-12 border-b border-[#DED5C5] pb-8">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#667653]">
+            Support Center
           </span>
 
-          <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             How can we help?
           </h1>
 
-          <p className="mt-3 max-w-xl text-sm leading-6 text-[#240765]/60 sm:text-base">
+          <p className="mt-3 max-w-xl text-sm leading-7 text-[#353B2E]/65 sm:text-base">
             Find a quick answer below, or send us a message and we’ll get back
             to you.
           </p>
         </header>
 
-        {/* Getting started */}
-        <section aria-labelledby="start-heading" className="mb-14">
-          <h2 id="start-heading" className="text-xl font-bold tracking-tight">
-            Getting started
-          </h2>
+        {/* Getting Started */}
+        <section aria-labelledby="start-heading" className="mb-16">
+          <div className="mb-6">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#795C42]">
+              Your first steps
+            </span>
 
-          <p className="mt-1 text-sm text-[#240765]/60">
-            Four steps from an empty workspace to your first quiz.
-          </p>
+            <h2
+              id="start-heading"
+              className="mt-2 text-xl font-semibold tracking-tight"
+            >
+              Getting started
+            </h2>
 
-          <ol className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <p className="mt-1 text-sm text-[#353B2E]/60">
+              Four steps from an empty workspace to your first quiz.
+            </p>
+          </div>
+
+          <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((step, index) => (
               <li
                 key={step.title}
-                className="relative overflow-hidden rounded-xl border p-4 pt-5"
+                className="relative overflow-hidden rounded-xl border bg-white p-4 pt-5 transition duration-200 hover:-translate-y-1 hover:shadow-md"
                 style={{
-                  backgroundColor: `${step.color}1A`,
-                  borderColor: `${step.color}59`,
+                  borderColor: `${step.color}50`,
                 }}
               >
                 <span
@@ -104,13 +112,18 @@ export default function SupportPage() {
                   style={{ backgroundColor: step.color }}
                 />
 
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/80 text-xs font-extrabold text-[#240765]">
+                <span
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold text-white"
+                  style={{ backgroundColor: step.color }}
+                >
                   {index + 1}
                 </span>
 
-                <h3 className="mt-3 text-sm font-bold">{step.title}</h3>
+                <h3 className="mt-4 text-sm font-semibold text-[#353B2E]">
+                  {step.title}
+                </h3>
 
-                <p className="mt-1.5 text-xs leading-5 text-[#240765]/65">
+                <p className="mt-2 text-xs leading-6 text-[#353B2E]/65">
                   {step.body}
                 </p>
               </li>
@@ -119,23 +132,32 @@ export default function SupportPage() {
         </section>
 
         {/* FAQ */}
-        <section aria-labelledby="faq-heading" className="mb-14">
-          <h2 id="faq-heading" className="text-xl font-bold tracking-tight">
-            Frequently asked questions
-          </h2>
+        <section aria-labelledby="faq-heading" className="mb-16">
+          <div className="mb-6">
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#795C42]">
+              Need an answer?
+            </span>
 
-          <div className="mt-6 divide-y divide-[#E6DDF8] overflow-hidden rounded-2xl border border-[#E6DDF8]">
+            <h2
+              id="faq-heading"
+              className="mt-2 text-xl font-semibold tracking-tight"
+            >
+              Frequently asked questions
+            </h2>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-[#DED5C5] bg-white divide-y divide-[#DED5C5]">
             {FAQS.map((item) => (
               <details
                 key={item.q}
-                className="group bg-white open:bg-[#FAF7FF]"
+                className="group open:bg-[#F8F5ED]"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-semibold transition-colors hover:bg-[#FAF7FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FACC15] [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-sm font-semibold text-[#353B2E] transition-colors hover:bg-[#F8F5ED] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#667653] [&::-webkit-details-marker]:hidden">
                   {item.q}
 
                   <svg
                     viewBox="0 0 24 24"
-                    className="h-4 w-4 shrink-0 text-[#F72585] transition-transform duration-200 group-open:rotate-45"
+                    className="h-4 w-4 shrink-0 text-[#667653] transition-transform duration-200 group-open:rotate-45"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -146,7 +168,7 @@ export default function SupportPage() {
                   </svg>
                 </summary>
 
-                <p className="px-5 pb-5 text-sm leading-6 text-[#240765]/70">
+                <p className="px-5 pb-5 text-sm leading-7 text-[#353B2E]/70">
                   {item.a}
                 </p>
               </details>
@@ -160,23 +182,28 @@ export default function SupportPage() {
           aria-labelledby="contact-heading"
           className="mx-auto w-full max-w-2xl"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-[#E6DDF8] bg-white p-5 pt-6 sm:p-7 sm:pt-8">
-            <span className="absolute inset-x-0 top-0 h-[3px] bg-[#F72585]" />
+          <div className="relative overflow-hidden rounded-2xl border border-[#DED5C5] bg-white p-5 pt-7 shadow-sm sm:p-8 sm:pt-9">
+            <span className="absolute inset-x-0 top-0 h-[3px] bg-[#667653]" />
+
+            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#795C42]">
+              We're here to help
+            </span>
 
             <h2
               id="contact-heading"
-              className="text-xl font-bold tracking-tight"
+              className="mt-2 text-xl font-semibold tracking-tight"
             >
               Send us a message
             </h2>
 
-            <p className="mt-1 text-sm text-[#240765]/60">
+            <p className="mt-2 text-sm leading-6 text-[#353B2E]/60">
               {RESPONSE_TIME}
             </p>
 
             <SupportForm />
           </div>
         </section>
+
       </div>
     </main>
   );

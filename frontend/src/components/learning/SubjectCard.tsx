@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -20,16 +21,16 @@ const STATUS_STYLE: Record<
   { badge: string; dot: string }
 > = {
   studying: {
-    badge: "border-[#FACC15]/40 bg-[#1A0550]/75 text-white",
-    dot: "bg-[#FACC15]",
+    badge: "border-[#DCE5D2] bg-[#F3F6EF]/95 text-[#526344]",
+    dot: "bg-[#667653]",
   },
   paused: {
-    badge: "border-amber-200/30 bg-[#1A0550]/75 text-white",
-    dot: "bg-amber-400",
+    badge: "border-[#E8DCC8] bg-[#F8F1E5]/95 text-[#795C42]",
+    dot: "bg-[#B58A54]",
   },
   ended: {
-    badge: "border-emerald-200/30 bg-[#1A0550]/75 text-white",
-    dot: "bg-emerald-400",
+    badge: "border-[#D8E3D8] bg-[#EFF5EF]/95 text-[#55745A]",
+    dot: "bg-[#668A6B]",
   },
 };
 
@@ -104,51 +105,90 @@ export function SubjectCard({ subject }: { subject: Subject }) {
 
   return (
     <>
-      <article className="group relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-[#E6DDF8] bg-[#1A0550] shadow-sm shadow-[#240765]/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#7209B7]/25 hover:border-[#F72585]/40">
+      <article className="
+        group relative aspect-[3/4] w-full overflow-hidden
+        rounded-2xl border border-[#DED5C5]
+        bg-[#E5D7C1]
+        shadow-sm shadow-[#4B3D2B]/[0.06]
+        transition duration-300
+        hover:-translate-y-1 hover:border-[#A8B398]
+        hover:shadow-xl hover:shadow-[#4B3D2B]/10
+      ">
         <Link
           href={`/learning/${subject.id}`}
           aria-label={`Open ${subject.title}`}
-          className="absolute inset-0 block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FACC15]"
+          className="
+            absolute inset-0 block rounded-2xl
+            focus-visible:outline-none
+            focus-visible:ring-2 focus-visible:ring-inset
+            focus-visible:ring-[#667653]
+          "
         >
           {/* Cover image */}
           <img
             src={image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+            className="
+              absolute inset-0 h-full w-full object-cover
+              transition-transform duration-500 ease-out
+              group-hover:scale-[1.04]
+            "
             onError={(e) => {
               e.currentTarget.src = DEFAULT_IMAGE;
             }}
           />
 
-          {/* Light bottom fade only behind the text, so the photo keeps its natural colors */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+          {/* Bottom fade for readable text */}
+          <div className="
+            pointer-events-none absolute inset-x-0 bottom-0
+            h-3/5 bg-gradient-to-t
+            from-[#211E17]/85 via-[#211E17]/40 to-transparent
+          " />
 
           {/* Card content */}
           <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
             <span
-              className={`mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-semibold tracking-wide backdrop-blur-md sm:text-[11px] ${status.badge}`}
+              className={`
+                mb-3 inline-flex items-center gap-2
+                rounded-full border px-3 py-1.5
+                text-[10px] font-semibold tracking-wide
+                backdrop-blur-md sm:text-[11px]
+                ${status.badge}
+              `}
             >
               <span className={`h-1.5 w-1.5 rounded-full ${status.dot}`} />
               {STATUS_LABEL[subject.status]}
             </span>
 
-            <h3 className="line-clamp-2 pr-2 text-lg font-bold leading-snug tracking-tight sm:text-xl">
+            <h3 className="
+              line-clamp-2 pr-2 text-lg font-bold
+              leading-snug tracking-tight sm:text-xl
+            ">
               {subject.title}
             </h3>
 
             {subject.description && (
-              <p className="mt-2 line-clamp-2 text-xs leading-5 text-white/70">
+              <p className="mt-2 line-clamp-2 text-xs leading-5 text-white/75">
                 {subject.description}
               </p>
             )}
 
-            <div className="mt-4 flex items-center justify-between gap-2 border-t border-white/15 pt-3">
-              <span className="text-[10px] text-white/55 sm:text-[11px]">
+            <div className="
+              mt-4 flex items-center justify-between gap-2
+              border-t border-white/20 pt-3
+            ">
+              <span className="text-[10px] text-white/65 sm:text-[11px]">
                 Updated {lastEdited}
               </span>
 
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 transition group-hover:border-[#FACC15] group-hover:bg-[#F72585]">
+              <span className="
+                flex h-7 w-7 shrink-0 items-center justify-center
+                rounded-full border border-white/30
+                bg-white/10 transition
+                group-hover:border-[#DCE5D2]
+                group-hover:bg-[#667653]
+              ">
                 <svg
                   viewBox="0 0 24 24"
                   className="h-3.5 w-3.5"
@@ -179,7 +219,16 @@ export function SubjectCard({ subject }: { subject: Subject }) {
             aria-label={`Options for ${subject.title}`}
             aria-expanded={menuOpen}
             title="Subject options"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-[#1A0550]/60 text-white shadow-sm backdrop-blur-md transition hover:border-[#FACC15] hover:bg-[#FACC15] hover:text-[#240765] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]"
+            className="
+              flex h-9 w-9 items-center justify-center
+              rounded-full border border-white/50
+              bg-[#353B2E]/65 text-white shadow-sm
+              backdrop-blur-md transition
+              hover:border-[#DCE5D2]
+              hover:bg-[#667653]
+              focus-visible:outline-none
+              focus-visible:ring-2 focus-visible:ring-[#667653]
+            "
           >
             <svg
               viewBox="0 0 24 24"
@@ -195,7 +244,12 @@ export function SubjectCard({ subject }: { subject: Subject }) {
 
           {menuOpen && (
             <div
-              className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-[#E6DDF8] bg-white p-1.5 shadow-xl shadow-[#240765]/15"
+              className="
+                absolute right-0 mt-2 w-44 overflow-hidden
+                rounded-xl border border-[#DED5C5]
+                bg-[#F8F5ED] p-1.5
+                shadow-xl shadow-[#4B3D2B]/10
+              "
               role="menu"
             >
               <button
@@ -205,7 +259,12 @@ export function SubjectCard({ subject }: { subject: Subject }) {
                   setMenuOpen(false);
                   setEditing(true);
                 }}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-[#240765] transition hover:bg-[#F72585]/10 hover:text-[#7209B7]"
+                className="
+                  flex w-full items-center gap-3 rounded-lg
+                  px-3 py-2.5 text-left text-sm font-medium
+                  text-[#353B2E] transition
+                  hover:bg-[#EAE3D5] hover:text-[#667653]
+                "
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -229,7 +288,12 @@ export function SubjectCard({ subject }: { subject: Subject }) {
                   setMenuOpen(false);
                   setConfirmDelete(true);
                 }}
-                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-red-600 transition hover:bg-red-50"
+                className="
+                  flex w-full items-center gap-3 rounded-lg
+                  px-3 py-2.5 text-left text-sm font-medium
+                  text-[#98604F] transition
+                  hover:bg-[#F0E4DA]
+                "
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -262,18 +326,30 @@ export function SubjectCard({ subject }: { subject: Subject }) {
       {/* Delete confirmation */}
       {confirmDelete && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A0550]/60 p-4 backdrop-blur-md"
+          className="
+            fixed inset-0 z-[100] flex items-center justify-center
+            bg-[#353B2E]/55 p-4 backdrop-blur-sm
+          "
           onClick={() => !deleting && setConfirmDelete(false)}
         >
           <div
             role="alertdialog"
             aria-modal="true"
             aria-labelledby="delete-subject-title"
-            className="w-full max-w-md overflow-hidden rounded-3xl border border-white/70 bg-white shadow-2xl shadow-[#1A0550]/25"
+            className="
+              w-full max-w-md overflow-hidden
+              rounded-2xl border border-[#DED5C5]
+              bg-[#F8F5ED]
+              shadow-2xl shadow-[#353B2E]/20
+            "
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 sm:p-7">
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-red-50 text-red-600">
+              <div className="
+                mb-5 flex h-11 w-11 items-center justify-center
+                rounded-xl border border-[#EAD8CC]
+                bg-[#F0E4DA] text-[#98604F]
+              ">
                 <svg
                   viewBox="0 0 24 24"
                   className="h-5 w-5"
@@ -292,13 +368,13 @@ export function SubjectCard({ subject }: { subject: Subject }) {
 
               <h2
                 id="delete-subject-title"
-                className="text-xl font-bold tracking-tight text-[#240765]"
+                className="text-xl font-bold tracking-tight text-[#353B2E]"
               >
                 Delete this subject?
               </h2>
 
-              <p className="mt-3 text-sm leading-6 text-[#240765]/65">
-                <strong className="font-semibold text-[#240765]">
+              <p className="mt-3 text-sm leading-6 text-[#777467]">
+                <strong className="font-semibold text-[#353B2E]">
                   {subject.title}
                 </strong>{" "}
                 and all its topics and notes will be permanently deleted.
@@ -306,12 +382,22 @@ export function SubjectCard({ subject }: { subject: Subject }) {
               </p>
             </div>
 
-            <div className="flex flex-col-reverse gap-2 border-t border-[#E6DDF8] bg-[#FAF7FF] px-6 py-4 sm:flex-row sm:justify-end">
+            <div className="
+              flex flex-col-reverse gap-2
+              border-t border-[#DED5C5]
+              bg-[#F3EBDD] px-6 py-4
+              sm:flex-row sm:justify-end
+            ">
               <button
                 type="button"
                 disabled={deleting}
                 onClick={() => setConfirmDelete(false)}
-                className="rounded-full px-5 py-2.5 text-sm font-semibold text-[#240765]/65 transition hover:bg-[#F0E8FF] disabled:opacity-50"
+                className="
+                  rounded-full px-5 py-2.5 text-sm font-semibold
+                  text-[#795C42] transition
+                  hover:bg-[#EAE3D5]
+                  disabled:opacity-50
+                "
               >
                 Cancel
               </button>
@@ -320,7 +406,12 @@ export function SubjectCard({ subject }: { subject: Subject }) {
                 type="button"
                 disabled={deleting}
                 onClick={handleDelete}
-                className="rounded-full bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="
+                  rounded-full bg-[#98604F] px-5 py-2.5
+                  text-sm font-semibold text-white
+                  transition hover:bg-[#814E40]
+                  disabled:cursor-not-allowed disabled:opacity-50
+                "
               >
                 {deleting ? "Deleting..." : "Delete subject"}
               </button>

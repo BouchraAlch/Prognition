@@ -30,12 +30,12 @@ function ToolbarButton({
       aria-pressed={active}
       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg
         text-sm transition-colors duration-200
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FACC15]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-black
         disabled:cursor-not-allowed disabled:opacity-40
         ${
           active
-            ? "bg-[#F72585] text-white shadow-[0_4px_14px_rgba(247,37,133,0.25)]"
-            : "text-[#21005e]/70 hover:bg-[#A78BFA]/15 hover:text-[#21005e]"
+            ? "bg-black text-white shadow-sm"
+            : "text-black/75 hover:bg-gray-100 hover:text-black"
         }`}
     >
       {children}
@@ -44,18 +44,30 @@ function ToolbarButton({
 }
 
 function Divider() {
-  return <div className="my-1 h-px w-6 bg-[#21005e]/10" />;
+  return <div className="my-1 h-px w-6 bg-gray-300" />;
 }
 
+// Standard color palette
 const COLORS = [
-  "#21005e",
-  "#360099",
-  "#F72585",
-  "#A78BFA",
-  "#4CC9A0",
-  "#D97706",
-  "#DC2626",
-  "#526581",
+  // Basic colors
+  "#000000", // Black
+  "#FFFFFF", // White
+  "#FF0000", // Red
+  "#0000FF", // Blue
+  "#FFFF00", // Yellow
+  "#008000", // Green
+  "#FFA500", // Orange
+  "#800080", // Purple
+
+  // Additional colors
+  "#FFC0CB", // Pink
+  "#A52A2A", // Brown
+  "#808080", // Gray
+  "#00FFFF", // Cyan
+  "#00FF00", // Lime
+  "#800000", // Maroon
+  "#000080", // Navy
+  "#808000", // Olive
 ];
 
 const FONT_SIZES = ["12px", "14px", "16px", "18px", "24px", "32px"];
@@ -161,9 +173,9 @@ export function EditorToolbar({ editor }: Props) {
           if (size) editor.chain().focus().setFontSize(size).run();
           e.target.value = "";
         }}
-        className="w-10 rounded-lg border border-[#21005e]/15 bg-white
-          px-0.5 py-1 text-[11px] font-semibold text-[#21005e]/70 outline-none
-          focus:border-[#F72585] focus:ring-2 focus:ring-[#FACC15]/40"
+        className="w-10 rounded-lg border border-gray-300 bg-white
+          px-0.5 py-1 text-[11px] font-semibold text-black/75 outline-none
+          focus:border-black focus:ring-2 focus:ring-black/20"
       >
         <option value="">Aa</option>
         {FONT_SIZES.map((size) => (
@@ -175,6 +187,7 @@ export function EditorToolbar({ editor }: Props) {
 
       <Divider />
 
+      {/* Text color palette */}
       <div className="flex flex-col items-center gap-2 py-1">
         {COLORS.map((color) => (
           <button
@@ -184,10 +197,10 @@ export function EditorToolbar({ editor }: Props) {
             title={`Text color ${color}`}
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => editor.chain().focus().setColor(color).run()}
-            className="h-4 w-4 rounded-full border border-white
-              ring-1 ring-[#21005e]/15 transition-transform
+            className="h-4 w-4 rounded-full border border-gray-300
+              ring-1 ring-black/10 transition-transform
               hover:scale-125 focus:outline-none focus-visible:ring-2
-              focus-visible:ring-[#FACC15]"
+              focus-visible:ring-black"
             style={{ backgroundColor: color }}
           />
         ))}

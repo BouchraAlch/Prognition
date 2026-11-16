@@ -70,13 +70,15 @@ export function NoteWorkspace({
   }, [selectedTopicId]);
 
   const stateClass =
-    "relative flex min-h-[50vh] items-center justify-center overflow-hidden rounded-2xl border border-[#21005e]/12 bg-white px-6 text-center";
+    "relative flex min-h-[50vh] items-center justify-center overflow-hidden rounded-2xl border border-[#DED5C5] bg-[#F8F5ED] px-6 text-center";
 
   if (!selectedTopicId) {
     return (
-      <div className={`${stateClass} border-dashed border-[#A78BFA]/50 bg-[#A78BFA]/[0.06]`}>
+      <div
+        className={`${stateClass} border-dashed border-[#B9A68D] bg-[#E5D7C1]/20`}
+      >
         <div className="max-w-sm">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F72585]/10 text-[#F72585]">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#667653]/10 text-[#667653]">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -89,10 +91,12 @@ export function NoteWorkspace({
               <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
             </svg>
           </div>
-          <h3 className="font-extrabold text-[#21005e]">
+
+          <h3 className="font-extrabold text-[#353B2E]">
             Start with a topic
           </h3>
-          <p className="mt-2 text-sm leading-6 text-[#21005e]/70">
+
+          <p className="mt-2 text-sm leading-6 text-[#777467]">
             Select an existing topic or create a new one to start taking notes.
           </p>
         </div>
@@ -102,10 +106,10 @@ export function NoteWorkspace({
 
   if (loading) {
     return (
-      <div className={`${stateClass} text-sm text-[#21005e]/70`}>
-        <span className="absolute inset-x-0 top-0 h-[3px] bg-[#FACC15]" />
+      <div className={`${stateClass} text-sm text-[#777467]`}>
+        <span className="absolute inset-x-0 top-0 h-[3px] bg-[#B9A68D]" />
         <div>
-          <span className="mx-auto mb-3 block h-6 w-6 animate-spin rounded-full border-2 border-[#21005e]/15 border-t-[#F72585]" />
+          <span className="mx-auto mb-3 block h-6 w-6 animate-spin rounded-full border-2 border-[#DED5C5] border-t-[#667653]" />
           Loading your note…
         </div>
       </div>
@@ -114,11 +118,11 @@ export function NoteWorkspace({
 
   if (error) {
     return (
-      <div className={`${stateClass} text-sm text-red-600`}>
-        <span className="absolute inset-x-0 top-0 h-[3px] bg-red-500" />
+      <div className={`${stateClass} text-sm text-[#98604F]`}>
+        <span className="absolute inset-x-0 top-0 h-[3px] bg-[#98604F]" />
         <div>
           <p className="font-bold">Unable to load this note</p>
-          <p className="mt-2 text-red-500">{error}</p>
+          <p className="mt-2 text-[#98604F]/80">{error}</p>
         </div>
       </div>
     );

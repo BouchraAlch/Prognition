@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -23,35 +24,44 @@ export function SubjectsSection({
 
   return (
     <section aria-labelledby="subjects-heading">
-      {/* Local keyframes so the card entrance animation always works */}
       <style>{`
         @keyframes subjectFadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
+
         @media (prefers-reduced-motion: reduce) {
-          .subject-fade-in { animation: none !important; }
+          .subject-fade-in {
+            animation: none !important;
+          }
         }
       `}</style>
 
       {/* Section header */}
-      <div className="mb-7 flex flex-col gap-5 border-b border-[#E6DDF8] pb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-7 flex flex-col gap-5 border-b border-[#DED5C5] pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#7209B7]">
+          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#667653]">
             Your personal library
           </span>
 
           <h2
             id="subjects-heading"
-            className="mt-2 text-2xl font-bold tracking-tight text-[#240765] sm:text-3xl"
+            className="mt-2 text-2xl font-bold tracking-tight text-[#353B2E] sm:text-3xl"
           >
             My Subjects
-            <span className="ml-3 inline-flex items-center justify-center rounded-full bg-[#F72585]/10 px-2.5 py-1 align-middle text-xs font-semibold text-[#F72585]">
+
+            <span className="ml-3 inline-flex items-center justify-center rounded-full border border-[#D9CFBD] bg-[#EAE3D5] px-2.5 py-1 align-middle text-xs font-semibold text-[#795C42]">
               {sortedSubjects.length}
             </span>
           </h2>
 
-          <p className="mt-2 max-w-lg text-sm leading-6 text-[#240765]/60">
+          <p className="mt-2 max-w-lg text-sm leading-6 text-[#777467]">
             Everything you&apos;re learning, organized in one place.
           </p>
         </div>
@@ -59,7 +69,16 @@ export function SubjectsSection({
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#FACC15] px-5 py-3 text-sm font-bold text-[#240765] shadow-[0_4px_16px_rgba(250,204,21,0.30)] transition duration-200 hover:bg-[#FFE066] hover:shadow-[0_6px_20px_rgba(250,204,21,0.40)] active:scale-[0.98] sm:w-auto"
+          className="
+            inline-flex w-full shrink-0 items-center justify-center gap-2
+            rounded-full bg-[#667653] px-5 py-3
+            text-sm font-semibold text-white
+            shadow-sm transition duration-200
+            hover:bg-[#526344] hover:shadow-md
+            active:scale-[0.98] sm:w-auto
+            focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-[#667653] focus-visible:ring-offset-2
+          "
         >
           <svg
             viewBox="0 0 24 24"
@@ -79,8 +98,17 @@ export function SubjectsSection({
 
       {/* Empty state */}
       {sortedSubjects.length === 0 ? (
-        <div className="flex min-h-[360px] flex-col items-center justify-center rounded-3xl border border-dashed border-[#D4C2F3] bg-[#FAF7FF] px-6 py-12 text-center sm:min-h-[420px]">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#E6DDF8] bg-gradient-to-br from-[#3A0CA3] to-[#7209B7] text-[#FACC15] shadow-[0_0_18px_rgba(247,37,133,0.22)]">
+        <div className="
+          flex min-h-[360px] flex-col items-center justify-center
+          rounded-2xl border border-dashed border-[#CFC2AA]
+          bg-[#F8F5ED] px-6 py-12 text-center
+          sm:min-h-[420px]
+        ">
+          <div className="
+            flex h-16 w-16 items-center justify-center
+            rounded-2xl border border-[#DED5C5]
+            bg-[#EAE3D5] text-[#667653]
+          ">
             <svg
               viewBox="0 0 24 24"
               className="h-8 w-8"
@@ -96,11 +124,11 @@ export function SubjectsSection({
             </svg>
           </div>
 
-          <h3 className="mt-6 text-xl font-bold tracking-tight text-[#240765]">
+          <h3 className="mt-6 text-xl font-bold tracking-tight text-[#353B2E]">
             Your learning journey starts here
           </h3>
 
-          <p className="mt-3 max-w-md text-sm leading-6 text-[#240765]/60">
+          <p className="mt-3 max-w-md text-sm leading-6 text-[#777467]">
             Create your first subject to organize your lessons, keep your
             notes together, and start building your personal knowledge library.
           </p>
@@ -108,7 +136,15 @@ export function SubjectsSection({
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#FACC15] px-6 py-3 text-sm font-bold text-[#240765] shadow-[0_4px_16px_rgba(250,204,21,0.30)] transition hover:bg-[#FFE066] active:scale-[0.98]"
+            className="
+              mt-7 inline-flex items-center gap-2
+              rounded-full bg-[#667653] px-6 py-3
+              text-sm font-semibold text-white
+              transition hover:bg-[#526344]
+              active:scale-[0.98]
+              focus-visible:outline-none focus-visible:ring-2
+              focus-visible:ring-[#667653] focus-visible:ring-offset-2
+            "
           >
             <svg
               viewBox="0 0 24 24"
